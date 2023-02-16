@@ -1,10 +1,16 @@
+import { AutenticadoGuard } from './guards/autenticado.guard';
 import { Routes } from "@angular/router";
 
 export const AppRotas: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'player',
     pathMatch: 'full'
+  },
+  {
+    path: 'player',
+    loadChildren: () => import('./pages/player/player.module').then(m=>m.PlayerModule),
+    canLoad: [AutenticadoGuard]
   },
   {
     path: 'login',
